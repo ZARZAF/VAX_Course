@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Test4</title>
+		<title>Dungeon Cube</title>
 		<meta charset="utf-8">
 		
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -13,6 +13,8 @@
 	</head>
 	
 	<body>
+		
+	
 		<script>
 			vaxInit( {antialias:true, alpha:true} );
 			
@@ -27,23 +29,38 @@
 			
 			scene.background = textureCube1;
 			
-			camera = new THREE.PerspectiveCamera( 80, window.innerWidth/window.innerHeight, 400, 3000 );
+			camera = new THREE.PerspectiveCamera( 36, window.innerWidth/window.innerHeight, 400, 3000 );
 			camera.position.set( 0, 0, 0 );
 			camera.lookAt( new THREE.Vector3( 0, 0, -1 ) );
 
 			light.position.set( 0, 0, 0 );
+			light.distance = 1.0;
+			//
+			//var light = new THREE.DirectionalLight(0xfff0dd, 1);
+			//light.position.set(0, 5, 10);
+			//scene.add(light);
+			
+			
 			
 			// обекти
 			var geometry = new THREE.OctahedronGeometry( 1 );
 
 			var n = 300;
 			var objects = [];
+			
+			var magic_geometry = new THREE.IcosahedronGeometry(1, 0);
+			var magic_material = new THREE.MeshPhysicalMaterial({
+				roughness: 0,
+				transmission: 1,
+				thickness: 0.3,
+			});
+			
+			
+			
 			for( var i=0; i<n; i++)
-			{
-				var material = new THREE.MeshLambertMaterial( {color: THREE.MathUtils.randInt(0, 0xFFFFFF), transparent:true, opacity:0.5} ),
-					mesh = new THREE.Mesh( geometry, material );
-					
-				mesh.scale.set( 20, 40, 20 );
+			{					
+			var mesh = new THREE.Mesh(magic_geometry, magic_material);
+				mesh.scale.set( 60, 60, 60 );
 				
 				var r = THREE.MathUtils.randFloat(1000,3000),
 					a = THREE.MathUtils.randFloat(0,2*Math.PI),
@@ -67,11 +84,13 @@
 			
 			function deviceOrientation( event )
 			{
+				// взимаме ъглите
 				var alpha = event.alpha,
 					gamma = event.gamma;
 
 				if( alpha === null ) return;
-
+				
+				// поправяме ги, за да ни е удобно
 				if( gamma>=0 )
 					gamma = 90-gamma;
 				else
@@ -91,5 +110,4 @@
 		</script>
 	</body>
 </html>
-
 
