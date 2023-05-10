@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>E1009: Добавена реалност</title>
+		<title>Test4</title>
 		<meta charset="utf-8">
 		
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -13,25 +13,7 @@
 	</head>
 	
 	<body>
-		<button id="button" onclick="getVideo()" style="position:fixed; left:0; top:0; z-index:100; ">Видео</button>
-		<video id="video" autoplay style="display:none; position:fixed; left:0; top:0; z-index:-100; width: 100%;"></video>
-	
 		<script>
-			function getVideo()
-			{
-				navigator.mediaDevices.getUserMedia( {video:{facingMode:"environment"}} ).then(showVideo);
-			}
-			
-			function showVideo( stream )
-			{
-				// pпоказва се видео, скрива се бутона
-				document.getElementById('video').srcObject = stream;
-				document.getElementById('video').style.display = "block";
-				document.getElementById('button').style.display = "none";
-			}
-			
-			
-			
 			vaxInit( {antialias:true, alpha:true} );
 			
 			const loader = new THREE.CubeTextureLoader();
@@ -50,8 +32,6 @@
 			camera.lookAt( new THREE.Vector3( 0, 0, -1 ) );
 
 			light.position.set( 0, 0, 0 );
-		
-			scene.fog = new THREE.Fog( 'lightcyan', 500, 3000 );
 			
 			// обекти
 			var geometry = new THREE.OctahedronGeometry( 1 );
@@ -87,13 +67,11 @@
 			
 			function deviceOrientation( event )
 			{
-				// взимаме ъглите
 				var alpha = event.alpha,
 					gamma = event.gamma;
 
 				if( alpha === null ) return;
-				
-				// поправяме ги, за да ни е удобно
+
 				if( gamma>=0 )
 					gamma = 90-gamma;
 				else
