@@ -29,7 +29,7 @@
 			
 			scene.background = textureCube;
 			
-			camera = new THREE.PerspectiveCamera( 36, window.innerWidth/window.innerHeight, 400, 3000 );
+			camera = new THREE.PerspectiveCamera( 48, window.innerWidth/window.innerHeight, 400, 3000 );
 			camera.position.set( 0, 0, 0 );
 			camera.lookAt( new THREE.Vector3( 0, 0, -1 ) );
 
@@ -58,7 +58,7 @@
 				
 				var r = THREE.MathUtils.randFloat(1000,3000),
 					a = THREE.MathUtils.randFloat(0,2*Math.PI),
-					b = THREE.MathUtils.randFloat(-2*Math.PI,2*Math.PI);
+					b = THREE.MathUtils.randFloat(Math.PI/4,Math.PI/1.8);
 				mesh.position.setFromSphericalCoords( r, b, a );
 				mesh.rotation.x = THREE.MathUtils.randFloat(0,2*Math.PI);
 				mesh.rotation.y = THREE.MathUtils.randFloat(0,2*Math.PI);
